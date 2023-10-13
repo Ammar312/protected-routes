@@ -11,7 +11,11 @@ const Signup = () => {
     const email = inputRef.current[1].value;
     const password = inputRef.current[2].value;
     try {
-      const response = axios.post(`${baseURL}api/v1/signup`, {});
+      const response = axios.post(`${baseURL}api/v1/signup`, {
+        username,
+        email,
+        password,
+      });
     } catch (error) {}
   };
   return (
