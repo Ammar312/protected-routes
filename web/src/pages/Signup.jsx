@@ -1,7 +1,19 @@
-import React from "react";
+import axios from "axios";
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
-  const handleSubmit = () => {};
+  const inputRef = useRef();
+  const baseURL = "http://localhost:3000/";
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const username = inputRef.current[0].value;
+    const email = inputRef.current[1].value;
+    const password = inputRef.current[2].value;
+    try {
+      const response = axios.post(`${baseURL}api/v1/signup`, {});
+    } catch (error) {}
+  };
   return (
     <div className="bg-blue-200 min-h-screen flex justify-center items-center">
       <div className=" bg-white px-8 pt-10 pb-6 w-[360px]">
@@ -9,7 +21,11 @@ const Signup = () => {
           Register
         </p>
         <div>
-          <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+          <form
+            className="flex flex-col gap-3"
+            onSubmit={handleSubmit}
+            ref={inputRef}
+          >
             <input
               type="text"
               placeholder="Username"
@@ -21,14 +37,14 @@ const Signup = () => {
               placeholder="password"
               className="p-2 border-2 "
             />
-            <label
+            {/* <label
               htmlFor="file"
               className="flex items-center gap-2 cursor-pointer"
             >
-              {/* <img src={addAvatar} alt="addavatar" className="w-10" /> */}
+              <img src={addAvatar} alt="addavatar" className="w-10" />
               <span className=" text-blue-800">Add Your Image</span>
             </label>
-            <input type="file" name="" id="file" className="hidden" />
+            <input type="file" name="" id="file" className="hidden" /> */}
             <button
               type="submit"
               className=" bg-blue-400 text-white p-2 text-lg hover:rounded-md transition-all mt-5"

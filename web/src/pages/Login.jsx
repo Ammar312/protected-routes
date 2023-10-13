@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const handleSubmit = () => {};
@@ -30,7 +31,7 @@ const Login = () => {
           </form>
         </div>
         <div className=" text-center my-4 text-blue-900">
-          {/* Don't Have Account? <Link to="/register">Register</Link> */}
+          {/* Don't Have Account? <Link to="/signup">Sign up</Link> */}
         </div>
       </div>
     </div>

@@ -6,11 +6,11 @@ import Login from "./pages/Login";
 
 const App = () => {
   return (
-    <div className=" p-2 min-h-screen bg-gradient-to-br from-[#ffb347] to-[#ffcc33]">
+    <div className="min-h-screen">
       {/* <Bar />
       <CreatePost /> */}
-      {/* <Signup /> */}
-      <Login />
+      <Signup />
+      {/* <Login /> */}
     </div>
   );
 };
