@@ -40,6 +40,9 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/v1", apiv1);
+app.use("/api/v1/ping", (req, res) => {
+  res.send({ message: "ok" });
+});
 app.use(express.static(path.join(__dirname, "web/dist")));
 
 app.listen(PORT, () => {

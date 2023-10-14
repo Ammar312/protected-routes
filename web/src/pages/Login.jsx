@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const inputRef = useRef(null);
   const baseURL = "http://localhost:3000/";
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = inputRef.current[0].value;
