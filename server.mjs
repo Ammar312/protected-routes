@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import "dotenv/config";
+import Jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import apiv1 from "./APIv1/index.mjs";
 import authRouter from "./APIv1/auth.mjs";
@@ -10,7 +11,12 @@ const app = express();
 const __dirname = path.resolve();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
 app.use("/api/v1", authRouter);

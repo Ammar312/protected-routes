@@ -1,8 +1,23 @@
-import React from "react";
+import axios from "axios";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const handleSubmit = () => {};
+  const inputRef = useRef(null);
+  const baseURL = "http://localhost:3000/";
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = inputRef.current[0].value;
+    const password = inputRef.current[1].value;
+
+    try {
+      const response = await axios.post(`${baseURL}api/v1/login`, {
+        email,
+        password,
+      });
+      console.log(response);
+    } catch (error) {}
+  };
   return (
     <div className="bg-blue-200 min-h-screen flex justify-center items-center">
       <div className=" bg-white px-8 pt-10 pb-6 w-[360px]">
@@ -10,7 +25,11 @@ const Login = () => {
           Login
         </p>
         <div>
-          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+          <form
+            className="flex flex-col gap-5"
+            onSubmit={handleSubmit}
+            ref={inputRef}
+          >
             <input
               type="email"
               placeholder="abc@gmail.com"
