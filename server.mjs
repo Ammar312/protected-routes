@@ -4,6 +4,7 @@ import cors from "cors";
 import "dotenv/config";
 import cookieParser from "cookie-parser";
 import apiv1 from "./APIv1/index.mjs";
+import authRouter from "./APIv1/auth.mjs";
 
 const app = express();
 const __dirname = path.resolve();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 
+app.use("/api/v1", authRouter);
 app.use((req, res, next) => {
   const token = req.cookies.token;
   console.log("token", token);
@@ -32,8 +34,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/v1", apiv1);
-
 app.use(express.static(path.join(__dirname, "web/dist")));
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

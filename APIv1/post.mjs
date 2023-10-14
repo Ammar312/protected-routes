@@ -6,7 +6,7 @@ import { ObjectId } from "mongodb";
 const router = express.Router();
 const dateVar = JSON.stringify(new Date());
 const result = dateVar.slice(0, 11);
-const db = client.db("crudDB");
+const db = client.db("socialapp");
 const dbCollection = db.collection("posts");
 
 let posts = [

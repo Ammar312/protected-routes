@@ -3,7 +3,7 @@ import { client } from "../mongodb.mjs";
 import Jwt from "jsonwebtoken";
 import { stringToHash, varifyHash } from "bcrypt-inzi";
 const router = express.Router();
-const db = client.db("crudDB");
+const db = client.db("socialapp");
 const dbCollection = db.collection("users");
 
 router.post("/login", async (req, res, next) => {
