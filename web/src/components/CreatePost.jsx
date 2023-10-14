@@ -5,7 +5,7 @@ import EditPostComp from "./EditPostComp";
 import { message } from "antd";
 
 const CreatePost = () => {
-  // const baseURL = "http://localhost:3000/";
+  const baseURL = "http://localhost:3000/";
   const [allPosts, setAllPosts] = useState([]);
   const [toggleRefresh, setToggleRefresh] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -15,7 +15,7 @@ const CreatePost = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`api/v1/posts`);
+        const response = await axios.get(`${baseURL}api/v1/posts`);
         setAllPosts(response.data);
       } catch (error) {}
     };

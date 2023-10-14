@@ -1,24 +1,32 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Signup = () => {
-  const inputRef = useRef();
+  const inputRef = useRef(null);
+  const [err, setErr] = useState("hidden");
   const baseURL = "http://localhost:3000/";
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const firstName = inputRef.current[0].value;
     const lastName = inputRef.current[1].value;
     const email = inputRef.current[2].value;
     const password = inputRef.current[3].value;
     const repeatPassword = inputRef.current[4].value;
+    if (repeatPassword !== password) {
+      setErr("");
+      return;
+    } else {
+      setErr("hidden");
+    }
     try {
-      const response = axios.post(`${baseURL}api/v1/signup`, {
+      const response = await axios.post(`${baseURL}api/v1/signup`, {
         firstName,
         lastName,
         email,
         password,
       });
+      console.log(response);
     } catch (error) {}
   };
   return (
@@ -52,8 +60,11 @@ const Signup = () => {
             <input
               type="password"
               placeholder="Repeat Password"
-              className="p-2 border-2 "
+              className={`p-2 border-2`}
             />
+            <span className={`text-xs text-red-500 ${err}`}>
+              Passwords must be same!
+            </span>
             {/* <label
               htmlFor="file"
               className="flex items-center gap-2 cursor-pointer"
