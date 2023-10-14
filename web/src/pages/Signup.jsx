@@ -7,12 +7,15 @@ const Signup = () => {
   const baseURL = "http://localhost:3000/";
   const handleSubmit = (e) => {
     e.preventDefault();
-    const username = inputRef.current[0].value;
-    const email = inputRef.current[1].value;
-    const password = inputRef.current[2].value;
+    const firstName = inputRef.current[0].value;
+    const lastName = inputRef.current[1].value;
+    const email = inputRef.current[2].value;
+    const password = inputRef.current[3].value;
+    const repeatPassword = inputRef.current[4].value;
     try {
       const response = axios.post(`${baseURL}api/v1/signup`, {
-        username,
+        firstName,
+        lastName,
         email,
         password,
       });
@@ -32,13 +35,23 @@ const Signup = () => {
           >
             <input
               type="text"
-              placeholder="Username"
+              placeholder="Firstname"
               className="p-2 border-2 "
             />
-            <input type="email" placeholder="email" className="p-2 border-2 " />
+            <input
+              type="text"
+              placeholder="lastname"
+              className="p-2 border-2 "
+            />
+            <input type="email" placeholder="Email" className="p-2 border-2 " />
             <input
               type="password"
-              placeholder="password"
+              placeholder="Password"
+              className="p-2 border-2 "
+            />
+            <input
+              type="password"
+              placeholder="Repeat Password"
               className="p-2 border-2 "
             />
             {/* <label
@@ -58,7 +71,7 @@ const Signup = () => {
           </form>
         </div>
         <div className=" text-center my-4 text-blue-900">
-          {/* Already Have Account? <Link to="/login">Login</Link> */}
+          Already Have Account? <Link to="/login">Login</Link>
         </div>
       </div>
     </div>

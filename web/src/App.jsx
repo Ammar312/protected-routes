@@ -1,9 +1,8 @@
 import React from "react";
-import CreatePost from "./components/CreatePost";
-import Bar from "./components/Bar";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
@@ -15,8 +14,10 @@ const App = () => {
     // </div>
     <BrowserRouter>
       <Routes>
-        <Route path="register" element={<Signup />} />
+        <Route path="/" element={<Home />} />
+        <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
+        <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
     </BrowserRouter>
   );
