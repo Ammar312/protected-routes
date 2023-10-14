@@ -11,10 +11,16 @@ const Login = () => {
     const password = inputRef.current[1].value;
 
     try {
-      const response = await axios.post(`${baseURL}api/v1/login`, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${baseURL}api/v1/login`,
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       console.log(response);
     } catch (error) {}
   };
