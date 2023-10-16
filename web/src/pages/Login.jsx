@@ -1,11 +1,13 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { GlobalContext } from "../context/context";
 
 const Login = () => {
   const inputRef = useRef(null);
   const baseURL = "http://localhost:3000/";
   const navigate = useNavigate();
+  const { state, dispatch } = useContext(GlobalContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = inputRef.current[0].value;
@@ -23,6 +25,10 @@ const Login = () => {
         }
       );
       console.log(response);
+      dispatch({
+        type: "USER_LOGIN",
+        payload: response.data.data,
+      });
     } catch (error) {}
   };
   return (
@@ -59,6 +65,7 @@ const Login = () => {
         <div className=" text-center my-4 text-blue-900">
           Don't Have Account? <Link to="/signup">Signup</Link>
         </div>
+        <div>{JSON.stringify(state)}</div>
       </div>
     </div>
   );

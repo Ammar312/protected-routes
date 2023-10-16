@@ -26,7 +26,7 @@ router.post("/login", async (req, res, next) => {
         // Genarate a Token
         const token = Jwt.sign(
           {
-            isAdmin: false,
+            isAdmin: result.isAdmin,
             firstName: result.firstName,
             lastName: result.lastName,
             email: req.body.email,
@@ -43,6 +43,12 @@ router.post("/login", async (req, res, next) => {
         });
         res.send({
           message: "Login Successfully",
+          data: {
+            isAdmin: result.isAdmin,
+            firstName: result.firstName,
+            lastName: result.lastName,
+            email: req.body.email,
+          },
         });
         return;
       } else {
@@ -73,6 +79,7 @@ router.post("/signup", async (req, res, next) => {
     if (!result) {
       const passwordHash = await stringToHash(req.body.password);
       const addUser = await dbCollection.insertOne({
+        isAdmin: false,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,

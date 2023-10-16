@@ -15,7 +15,9 @@ const CreatePost = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${baseURL}api/v1/posts`);
+        const response = await axios.get(`${baseURL}api/v1/posts`, {
+          withCredentials: true,
+        });
         setAllPosts(response.data);
       } catch (error) {}
     };
