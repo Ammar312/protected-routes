@@ -20,7 +20,7 @@ app.use(
 app.use(cookieParser());
 
 app.use("/api/v1", authRouter);
-app.use((req, res, next) => {
+app.use("/api/v1", (req, res, next) => {
   const token = req.cookies.token;
   console.log("token", token);
   try {
@@ -40,10 +40,14 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/v1", apiv1);
-app.use("/api/v1/ping", (req, res) => {
-  res.send({ message: "ok" });
+// app.use("/api/v1/ping", (req, res) => {
+//   res.send({ message: "ok" });
+// });
+app.get("/", express.static(path.join(__dirname, "web/dist")));
+app.use("/", express.static(path.join(__dirname, "web/dist")));
+app.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "web/dist/index.html"));
 });
-app.use(express.static(path.join(__dirname, "web/dist")));
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
