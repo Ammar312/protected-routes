@@ -99,4 +99,10 @@ router.post("/signup", async (req, res, next) => {
   }
 });
 
+router.post("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.send({
+    message: "Logout Successfully",
+  });
+});
 export default router;
