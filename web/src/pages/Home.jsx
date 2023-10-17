@@ -3,10 +3,11 @@ import CreatePost from "../components/CreatePost";
 import Bar from "../components/Bar";
 import { GlobalContext } from "../context/context";
 import axios from "axios";
+import { baseURL } from "../core";
 
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
-  const baseURL = "http://localhost:3000/";
+
   const logoutHandle = async () => {
     try {
       const response = await axios.post(

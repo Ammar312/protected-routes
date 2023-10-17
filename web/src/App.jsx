@@ -5,11 +5,12 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import axios from "axios";
 import { GlobalContext } from "./context/context";
+import { baseURL } from "./core";
 
 const App = () => {
   const { state, dispatch } = useContext(GlobalContext);
   // const [isLogin, setIsLogin] = useState(false);
-  const baseURL = "http://localhost:3000/";
+
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {

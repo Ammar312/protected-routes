@@ -3,9 +3,9 @@ import axios from "axios";
 import Post from "./Post";
 import EditPostComp from "./EditPostComp";
 import { message } from "antd";
+import { baseURL } from "../core";
 
 const CreatePost = () => {
-  const baseURL = "http://localhost:3000/";
   const [allPosts, setAllPosts] = useState([]);
   const [toggleRefresh, setToggleRefresh] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
