@@ -24,6 +24,7 @@ const getProfile = async (req, res, next) => {
         firstName: result.firstName,
         lastName: result.lastName,
         email: result.email,
+        _id: result._id,
       },
     });
   } catch (error) {

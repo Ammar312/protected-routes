@@ -11,6 +11,7 @@ export const reducer = (state, action) => {
           firstName: action.payload?.firstName,
           lastName: action.payload?.lastName,
           email: action.payload?.email,
+          _id: action.payload?._id,
         };
         return { ...state, isLogin: true, role, user };
       }

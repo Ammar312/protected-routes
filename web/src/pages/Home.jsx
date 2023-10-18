@@ -4,6 +4,7 @@ import Bar from "../components/Bar";
 import { GlobalContext } from "../context/context";
 import axios from "axios";
 import { baseURL } from "../core";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -27,6 +28,16 @@ const Home = () => {
   };
   return (
     <div>
+      {state.isLogin === true && state.role === "user" ? (
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+              <Link to="/profile">Profile</Link>
+            </li>
+          </ul>
+        </nav>
+      ) : null}
       <Bar />
       <button
         onClick={logoutHandle}
