@@ -9,16 +9,18 @@ const result = dateVar.slice(0, 11);
 const db = client.db("socialapp");
 const dbCollection = db.collection("posts");
 
-let posts = [
-  {
-    id: "12345",
-    title: "abc post title",
-    text: "some post text",
-  },
-];
-
 router.get("/post/:postId", (req, res, next) => {
   res.send("This is post " + new Date());
+});
+
+router.get("/feed", async (req, res) => {
+  const userId = req.query._id || req.body.decoded._id;
+
+  const allPosts = dbCollection.find({}).sort({ _id: -1 }).limit(120);
+  const allPostsIntoArray = await allPosts.toArray();
+  console.log("allPostsIntoArray :", allPostsIntoArray);
+
+  res.send(allPostsIntoArray);
 });
 
 router.get("/posts", async (req, res, next) => {

@@ -15,7 +15,7 @@ const CreatePost = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${baseURL}api/v1/posts`, {
+        const response = await axios.get(`${baseURL}api/v1/feed`, {
           withCredentials: true,
         });
         setAllPosts(response.data);
@@ -26,7 +26,7 @@ const CreatePost = () => {
   const submitPost = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`api/v1/post`, {
+      const response = await axios.post(`${baseURL}api/v1/post`, {
         title: titleInput.current.value,
         text: bodyInput.current.value,
       });
@@ -46,7 +46,7 @@ const CreatePost = () => {
     setConfirmLoading(true);
     try {
       const response = await axios.get(
-        `api/v1/search?q=${searchRef.current.value}`
+        `${baseURL}api/v1/search?q=${searchRef.current.value}`
       );
       console.log("searchresponse", response);
       setAllPosts([...response.data]);
@@ -57,7 +57,7 @@ const CreatePost = () => {
   };
   const deleteHandle = async (id) => {
     try {
-      const response = await axios.delete(`api/v1/post/${id}`);
+      const response = await axios.delete(`${baseURL}api/v1/post/${id}`);
       console.log(response.data);
       setConfirmLoading(true);
       message.success(`${response.data}`);
@@ -82,7 +82,7 @@ const CreatePost = () => {
     const text = e.target.parentElement.previousElementSibling.lastChild.value;
 
     try {
-      const response = await axios.put(`api/v1/post/${id}`, {
+      const response = await axios.put(`${baseURL}api/v1/post/${id}`, {
         title: title,
         text: text,
       });
@@ -118,7 +118,7 @@ const CreatePost = () => {
             ></textarea>
             <button
               type="submit"
-              className="border-2 border-white text-[1.1rem] text-white font-medium w-44 p-3 rounded-xl hover:text-black hover:bg-white transition-all"
+              className="border-2 border-black text-[1.1rem] text-black font-medium w-44 p-3 rounded-xl hover:text-black hover:bg-white transition-all"
             >
               Publish
             </button>
