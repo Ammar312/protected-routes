@@ -31,6 +31,7 @@ app.use("/api/v1", (req, res, next) => {
       lastName: decoded.lastName,
       email: decoded.email,
       isAdmin: decoded.isAdmin,
+      _id: decoded._id,
     };
     next();
   } catch (error) {

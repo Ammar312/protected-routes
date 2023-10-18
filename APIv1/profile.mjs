@@ -1,13 +1,20 @@
 import express from "express";
 const router = express.Router();
 import { client } from "../mongodb.mjs";
+import { ObjectId } from "mongodb";
 const db = client.db("socialapp");
 const dbCollection = db.collection("users");
 
-router.get("/profile", async (req, res, next) => {
+const getProfile = async (req, res, next) => {
+  const userId = req.params.userId || req.body.decoded._id;
+
+  if (!ObjectId.isValid(userId)) {
+    res.status(403).send(`Invalid user id`);
+    return;
+  }
   try {
     const result = await dbCollection.findOne({
-      email: req.body.decoded.email,
+      _id: new ObjectId(userId),
     });
     console.log(result);
     res.send({
@@ -23,6 +30,8 @@ router.get("/profile", async (req, res, next) => {
     console.log("error getting data mongodb: ", error);
     res.status(500).send({ message: "server error, please try later" });
   }
-});
+};
+router.get("/profile", getProfile);
+router.get("/profile/:userId", getProfile);
 
 export default router;

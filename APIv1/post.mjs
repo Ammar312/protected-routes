@@ -22,7 +22,15 @@ router.get("/post/:postId", (req, res, next) => {
 });
 
 router.get("/posts", async (req, res, next) => {
-  const allPosts = dbCollection.find({}).sort({ _id: -1 });
+  const userId = req.query._id || req.body.decoded._id;
+  if (!ObjectId.isValid(userId)) {
+    res.status(403).send(`Invalid post id`);
+    return;
+  }
+  const allPosts = dbCollection
+    .find({ authorId: new ObjectId(userId) })
+    .sort({ _id: -1 })
+    .limit(120);
   const allPostsIntoArray = await allPosts.toArray();
   console.log("allPostsIntoArray :", allPostsIntoArray);
 
@@ -39,6 +47,8 @@ router.post("/post", async (req, res, next) => {
     id: nanoid(),
     title: req.body.title,
     text: req.body.text,
+    authorEmail: req.body.decoded.email,
+    authorId: new ObjectId(req.body.decoded._id),
   });
   console.log("insertResponse: ", postMaterial);
 

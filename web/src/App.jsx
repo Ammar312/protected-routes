@@ -12,6 +12,20 @@ const App = () => {
   // const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
+    axios.interceptors.request.use(
+      function (config) {
+        // Do something before request is sent
+        config.withCredentials = true;
+        return config;
+      },
+      function (error) {
+        // Do something with request error
+        return Promise.reject(error);
+      }
+    );
+  });
+
+  useEffect(() => {
     const checkLoginStatus = async () => {
       try {
         const response = await axios.get(`${baseURL}api/v1/profile`, {
