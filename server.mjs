@@ -6,6 +6,7 @@ import Jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import apiv1 from "./APIv1/index.mjs";
 import authRouter from "./APIv1/auth.mjs";
+import unAuthRouter from "./unAuthRoutes/unAuth.mjs";
 
 const app = express();
 const __dirname = path.resolve();
@@ -35,8 +36,8 @@ app.use("/api/v1", (req, res, next) => {
     };
     next();
   } catch (error) {
-    console.log("error ", error);
-    res.status(401).send({ message: "invalid token" });
+    unAuthRouter(req, res);
+    return;
   }
 });
 
