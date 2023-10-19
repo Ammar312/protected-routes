@@ -59,31 +59,9 @@ const App = () => {
         <Routes>
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
+          <Route path="profile/:userId" element={<Profile />} />
           <Route path="*" element={<Navigate to="/login" replace={true} />} />
         </Routes>
-      ) : null}
-
-      {state.isLogin === false ? (
-        <>
-          <nav>
-            <ul>
-              <li>
-                <Link to={`/login`}>Login</Link>
-              </li>
-              <li>
-                <Link to={`/signup`}>Signup</Link>
-              </li>
-            </ul>
-          </nav>
-
-          <Routes>
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="profile/:userId" element={<ProfilePage />} />
-
-            <Route path="*" element={<Navigate to="/login" replace={true} />} />
-          </Routes>
-        </>
       ) : null}
 
       {state.isLogin === null ? (
