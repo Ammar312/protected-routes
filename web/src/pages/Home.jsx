@@ -33,7 +33,7 @@ const Home = () => {
           <ul>
             <li>
               <Link to="/">Home</Link>
-              <Link to="/profile">Profile</Link>
+              <Link to={`/profile/${state.user._id}`}>Profile</Link>
             </li>
           </ul>
         </nav>

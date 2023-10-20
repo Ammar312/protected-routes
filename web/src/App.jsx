@@ -50,8 +50,8 @@ const App = () => {
       {state.isLogin === true ? (
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="profile/:userId" element={<Profile />} />
+          {/* <Route path="profile" element={<Profile />} /> */}
+          <Route path={`profile/:userId`} element={<Profile />} />
           <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>
       ) : null}
@@ -59,7 +59,7 @@ const App = () => {
         <Routes>
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
-          <Route path="profile/:userId" element={<Profile />} />
+          <Route path={`profile/:userId`} element={<Profile />} />
           <Route path="*" element={<Navigate to="/login" replace={true} />} />
         </Routes>
       ) : null}

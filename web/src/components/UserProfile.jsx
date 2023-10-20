@@ -39,6 +39,7 @@ const UserProfile = () => {
         `${baseURL}api/v1/profile/${userId || ""}`
       );
       console.log(response);
+      console.log("userId:", userId);
       setProfile(response.data);
     } catch (error) {
       console.log(error);

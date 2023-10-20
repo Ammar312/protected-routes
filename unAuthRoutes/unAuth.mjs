@@ -5,8 +5,35 @@ import { ObjectId } from "mongodb";
 const router = express.Router();
 const db = client.db("socialapp");
 const dbCollection = db.collection("posts");
+const dbCollectionUsers = db.collection("users");
 
-const getProfile = async (req, res) => {
+// const getProfile = async (req, res) => {
+//   const userId = req.params.userId;
+
+//   if (!ObjectId.isValid(userId) && userId !== undefined) {
+//     res.status(403).send(`Invalid user id`);
+//     return;
+//   }
+//   try {
+//     const result = await dbCollection.findOne({
+//       _id: new ObjectId(userId),
+//     });
+//     console.log(result);
+//     res.send({
+//       message: "Profile fetched",
+//       data: {
+//         firstName: result.firstName,
+//         lastName: result.lastName,
+//         email: result.email,
+//       },
+//     });
+//   } catch (error) {
+//     console.log("error getting data mongodb: ", error);
+//     res.status(500).send({ message: "server error, please try later" });
+//   }
+// };
+router.get("/profile/:userId", async (req, res) => {
+  console.log("unauth route profile api");
   const userId = req.params.userId;
 
   if (!ObjectId.isValid(userId) && userId !== undefined) {
@@ -14,24 +41,23 @@ const getProfile = async (req, res) => {
     return;
   }
   try {
-    const result = await dbCollection.findOne({
+    const result = await dbCollectionUsers.findOne({
       _id: new ObjectId(userId),
     });
     console.log(result);
     res.send({
       message: "Profile fetched",
       data: {
-        firstName: result.firstName,
-        lastName: result.lastName,
-        email: result.email,
+        firstName: result?.firstName,
+        lastName: result?.lastName,
+        email: result?.email,
       },
     });
   } catch (error) {
     console.log("error getting data mongodb: ", error);
     res.status(500).send({ message: "server error, please try later" });
   }
-};
-router.get("/profile/:userId", getProfile);
+});
 
 router.get("/posts", async (req, res, next) => {
   const userId = req.query._id;

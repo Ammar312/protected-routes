@@ -36,6 +36,7 @@ app.use("/api/v1", (req, res, next) => {
     };
     next();
   } catch (error) {
+    console.log("errorabc", error);
     unAuthRouter(req, res);
     return;
   }
